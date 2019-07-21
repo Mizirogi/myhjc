@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <style type="text/css">
+        .toolbar {
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+        }
+
+        .text {
+            width: 500px;
+            border: 1px solid #ccc;
+            height: 200px;
+            background: rgba(255, 255, 255, 1);
+        }
+
+        #bj {
+            display: flex;
+            display: -webkit-flex;
+            justify-content: flex-end;
+        }
+
+        #title {
+            margin: 0 auto;
+            border: 1px solid black;
+            background: rgba(4, 41, 253, 0.09);
+            width: 650px;
+        }
+
+        #form {
+            width: 600px;
+            border: 1px solid black;
+            margin: 0 auto;
+            visibility: visible;
+        }
+
+        #btn-group {
+            display: flex;
+            display: -webkit-flex;
+            height: 40px;
+            align-items: center;
+            justify-content: flex-end;
+            background: rgba(4, 41, 253, 0.09);
+        }
+
+        label {
+            float: left;
+            text-align: right;
+            width: 100px;
+            height: 23px;
+        }
+
+        #btn-group input {
+
+            margin-right: 10px;
+            float: right;
+        }
+    </style>
+    <script type="text/javascript" src="./js/wangEditor.js"></script>
+    <script type="text/javascript" src="./js/jquery.js"></script>
+
+</head>
+
+<body>
+
+    <div id="title"><input type="checkbox" id="show" checked="true" value="1">用户信息
+        <div id="form">
+            <form action="">
+                <p><label>用户名称：</label> <input type="text" style="width: 450px"></p>
+                <p><label>用户密码：</label><input type="password" style="width: 450px"></p>
+                <p><label>确认密码：</label><input type="password" style="width: 450px"></p>
+                <p><label>出生日期：</label><input type="date" style="width: 450px"></p>
+                <p><label>我的博客：</label><input type="url" style="width: 450px"></p>
+                <p><label>电子邮箱：</label><input type="email" style="width: 450px" style="width: 450px"> </p>
+                <div><label>性别：</label>
+                    <input type="radio" name="sex">男
+                    <input type="radio" name="sex">女
+                </div>
+                <p><label>爱好：</label>
+                    <input type="checkbox">唱跳
+                    <input type="checkbox">rap
+                    <input type="checkbox">篮球
+
+                </p>
+                <p><label>用户家乡：</label><select name="" id="">
+                        <option value="">陕西</option>
+                        <option value="">山西</option>
+                    </select>
+                </p>
+                <p><label>个人说明：</label></p>
+
+                <div id="div1" class="toolbar">
+                </div>
+                <!-- <div style="padding: 5px 0; color: #ccc">分隔</div> -->
+                <div id="bj">
+                    <div id="div2" class="text">
+                        <p></p>
+                    </div>
+                </div>
+
+                <div id="btn-group">
+                    <input type="submit" value="提交" id="send">
+                    <input type="reset" id="res">
+                </div>
+            </form>
+        </div>
+        &NonBreakingSpace;
+    </div>
+    <!-- 引用js -->
+
+    <script type="text/javascript">
+        var E = window.wangEditor
+        var editor1 = new E('#div1', '#div2')
+        editor1.customConfig.menus = [
+            'bold',  // 粗体
+            'fontSize',  // 字号
+            'fontName',  // 字体
+            'italic',  // 斜体
+            'underline',  // 下划线
+            'foreColor',  // 文字颜色
+            'backColor',  // 背景颜色
+            'justify',  // 对齐方式
+            'emoticon',  // 表情
+            'image',  // 插入图片
+            'table',  // 表格
+            'undo',  // 撤销
+            'redo'  // 重复
+        ]
+        editor1.create()
+
+        $(document).ready(function () {
+
+            $("#show").click(function () {
+                if ($(this).attr("value") == '1') {
+                    $(this).attr("value", '0');
+                    // $("#form").css("visibility", "hidden");
+                    $("#form").css("display", "none");
+                } else {
+                    $(this).attr("value", '1');
+                    // $("#form").css("visibility", "visible");
+                    $("#form").css("display", "block");
+                }
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>
