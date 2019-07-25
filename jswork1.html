@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input type="number" value="" id="year"><button onclick="runnian()">检测是否为闰年</button>
+        <p id="demo"></p>
+    </div>
+    <div>
+        <button onclick="zhishu()">质数</button>
+    </div>
+    <div>
+        <input type="number" value="" id="money"><button onclick="geshui()">个税计算</button>
+
+    </div>
+    <div>
+        <input type="text" value="" id="array">以逗号分隔输入数组
+        <button onclick="paixu()">排序</button>
+        <p id="show"></p>
+    </div>
+</body>
+<script>
+
+    function runnian(year) {
+        var year = document.getElementById("year").value;
+        if (!(year % 4) && (year % 100)) {
+            document.getElementById("demo").innerHTML = year + '是闰年';
+        } else {
+            document.getElementById("demo").innerHTML = year + '不是闰年';
+        }
+    }
+
+    function zhishu() {
+        var b = [], j = 0;
+        for (var num = 1; num < 1000; num++) {
+            var count = 0;//统计因子个数
+            for (let i = 1; i <= num; i++) {
+                if (num % i == 0) {//因子
+                    count++;
+                    if (count > 2) {
+                        i = num + 1;
+                    }
+                }
+            }
+            if (count == 2) {
+                b[j] = num
+                j++
+            }
+        }
+        console.log(b)
+    }
+
+    function paixu() {
+        var str = document.getElementById("array").value;
+        var array = str.split(',');
+        if (array.length == 1) {
+            var array = str.split('，');
+        }
+        console.log(array)
+        var temp = 0;
+        for (let i = 0; i < array.length; i++) {
+            for (let j = 0; j < array.length - i; j++) {
+                if (array[j] > array[j + 1]) {
+                    temp = array[j + 1];
+                    array[j + 1] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+        console.log(array);
+        document.getElementById("show").innerHTML = array;
+    }
+
+    function geshui() {
+        var money = document.getElementById("money").value;
+        let a = money - 3500
+        console.log(a);
+        if (a <= 0) {
+            alert("您无需缴税");
+        } else if (a > 0 && a <= 1500) {
+            b = a * 0.03
+            alert("您需要缴税" + b + "元");
+        } else if (a > 1500 && a <= 4500) {
+            b = a * 0.1 - 105
+            alert("您需要缴税" + b + "元");
+        } else if (a > 4500 && a <= 9000) {
+            b = a * 0.2 - 555
+            alert("您需要缴税" + b + "元");
+        } else if (a > 9000 && a <= 35000) {
+            b = a * 0.25 - 1005
+            alert("您需要缴税" + b + "元");
+        } else if (a > 35000 && a <= 55000) {
+            b = a * 0.3 - 2755
+            alert("您需要缴税" + b + "元");
+        } else if (a > 55000 && a <= 80000) {
+            b = a * 0.35 - 5505
+            alert("您需要缴税" + b + "元");
+        } else if (a > 80000) {
+            b = a * 0.45 - 13505
+            alert("您需要缴税" + b + "元");
+        }
+    }
+</script>
+
+</html>
