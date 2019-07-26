@@ -8,6 +8,7 @@
     <title>Document</title>
     <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
     <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+    <script language="javascript" type="text/javascript" src="https://cdn.staticfile.org/jquery/1.7.2/jquery.min.js"></script>
 </head>
 
 <body>
@@ -35,7 +36,7 @@
     </div>
     <div>
         <input type="number" value="" id="usermoney">
-        
+
         <button onclick="autoshop()">售货机找零</button>
         <p id="shop"></p>
     </div>
@@ -53,6 +54,37 @@
         avatar: 'mp',
         placeholder: 'HHHHH'
     });</script>
+
+<script type="text/javascript">
+    // 鼠标点击特效
+    var mouseSum = 0;
+    jQuery(document).ready(function ($) {
+        $("body").click(function (e) {
+            var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+            var $i = $("<span/>").text(a[mouseSum]);
+            mouseSum = (mouseSum + 1) % a.length;
+            var x = e.pageX,
+                y = e.pageY;
+            $i.css({
+                "z-index": 9999999,
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "color": "#6651ff"
+            });
+            $("body").append($i);
+            $i.animate({
+                "top": y - 180,
+                "opacity": 0
+            },
+                1500,
+                function () {
+                    $i.remove();
+                });
+        });
+    }); 
+</script>
 
 
 <script>
@@ -143,6 +175,7 @@
         }
     }
 
+
     function suanzhishu() {
         var num1 = document.getElementById("num1").value;
         var num2 = document.getElementById("num2").value;
@@ -153,28 +186,28 @@
 
     function autoshop() {
         let money = document.getElementById("usermoney").value;
-        let n20= Math.floor( money/20);
-        let idx=money%20;
-        let n10=Math.floor(idx/10);
-         idx=idx%10;
-        let n5=Math.floor(idx/5);
-         idx=idx%5;
-        let n2=Math.floor(idx/2);
-         idx = idx%2;
-         let n1=idx;
-         console.log(n20,n5,n2,n1)
-         document.getElementById("shop").innerHTML="找零"+n20+'张20块 '+n10+'张10块 '+n5+'张5块  '+n2+'张2块  '+n1+'张1块  '
+        let n20 = Math.floor(money / 20);
+        let idx = money % 20;
+        let n10 = Math.floor(idx / 10);
+        idx = idx % 10;
+        let n5 = Math.floor(idx / 5);
+        idx = idx % 5;
+        let n2 = Math.floor(idx / 2);
+        idx = idx % 2;
+        let n1 = idx;
+        console.log(n20, n5, n2, n1)
+        document.getElementById("shop").innerHTML = "找零" + n20 + '张20块 ' + n10 + '张10块 ' + n5 + '张5块  ' + n2 + '张2块  ' + n1 + '张1块  '
 
     }
-  
-        var authorName = "芝麻开花";
-     	function doSomething() {
-      		 var bookName = "javascript";
-	}
-	doSomething();
-	console.log(authorName);
-	console.log(bookName);
-    
+
+    var authorName = "芝麻开花";
+    function doSomething() {
+        var bookName = "javascript";
+    }
+    doSomething();
+    console.log(authorName);
+    console.log(bookName);
+
 </script>
 
 </html>
