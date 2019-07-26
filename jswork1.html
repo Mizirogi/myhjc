@@ -155,13 +155,15 @@
         let money = document.getElementById("usermoney").value;
         let n20= Math.floor( money/20);
         let idx=money%20;
+        let n10=Math.floor(idx/10);
+         idx=idx%10;
         let n5=Math.floor(idx/5);
          idx=idx%5;
         let n2=Math.floor(idx/2);
          idx = idx%2;
          let n1=idx;
          console.log(n20,n5,n2,n1)
-         document.getElementById("shop").innerHTML="找零"+n20+'张20块 '+n5+'张5块  '+n2+'张2块  '+n1+'张1块  '
+         document.getElementById("shop").innerHTML="找零"+n20+'张20块 '+n10+'张10块 '+n5+'张5块  '+n2+'张2块  '+n1+'张1块  '
 
     }
   
