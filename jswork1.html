@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+    <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 <body>
@@ -27,6 +27,18 @@
         <button onclick="paixu()">排序</button>
         <p id="show"></p>
     </div>
+    <div>
+        <input type="number" value="" id="num1">
+        <input type="number" value="" id="num2">
+        <button onclick="suanzhishu()">指数运算</button>
+        <p id="suanzhishu"></p>
+    </div>
+    <div>
+        <input type="number" value="" id="usermoney">
+        
+        <button onclick="autoshop()">售货机找零</button>
+        <p id="shop"></p>
+    </div>
     <div id="vcomments"></div>
 </body>
 
@@ -34,12 +46,12 @@
 <script>
     new Valine({
         el: '#vcomments',
-        app_id: 'gEkw1BH5bgc0kh46jbqv5xnu-gzGzoHsz',   //这里变量的取值在网站配置文件里_config.yml
-        app_key: 'b8oex60mxCMf4cm05bx4DGn6', //这里变量的取值在网站配置文件里_config.yml
-        notify:false, 
-    verify:false, 
-    avatar:'mp', 
-        placeholder:'HHHHH'    //这里变量的取值在网站配置文件里_config.yml
+        app_id: 'gEkw1BH5bgc0kh46jbqv5xnu-gzGzoHsz',
+        app_key: 'b8oex60mxCMf4cm05bx4DGn6',
+        notify: false,
+        verify: false,
+        avatar: 'mp',
+        placeholder: 'HHHHH'
     });</script>
 
 
@@ -130,6 +142,37 @@
             alert("您需要缴税" + b + "元");
         }
     }
+
+    function suanzhishu() {
+        var num1 = document.getElementById("num1").value;
+        var num2 = document.getElementById("num2").value;
+        let r = num1 ** num2;
+        document.getElementById("suanzhishu").innerHTML = r;
+        console.log(r)
+    }
+
+    function autoshop() {
+        let money = document.getElementById("usermoney").value;
+        let n20= Math.floor( money/20);
+        let idx=money%20;
+        let n5=Math.floor(idx/5);
+         idx=idx%5;
+        let n2=Math.floor(idx/2);
+         idx = idx%2;
+         let n1=idx;
+         console.log(n20,n5,n2,n1)
+         document.getElementById("shop").innerHTML="找零"+n20+'张20块 '+n5+'张5块  '+n2+'张2块  '+n1+'张1块  '
+
+    }
+  
+        var authorName = "芝麻开花";
+     	function doSomething() {
+      		 var bookName = "javascript";
+	}
+	doSomething();
+	console.log(authorName);
+	console.log(bookName);
+    
 </script>
 
 </html>
