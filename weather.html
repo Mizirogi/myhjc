@@ -17,8 +17,13 @@
     <div class="container" id="container">
         <div class="headr">
             <div class="left">
-                <p class="city"> <span class="name">{{info.basic.city}}天气</span> <a href="">[切换]</a> </p>
-                <img src="./img/weather/100.png" alt="">
+                <p class="city"> <span class="name">{{info.basic.city}}天气</span> <span @click="change()"> [切换]</span>  </p>
+                <!-- <img src="./img/weather/100.png" alt=""> -->
+                <p > <span v-if="info.daily_forecast[0].cond.code_d==100"><img src="./img/weather/100.png"></span>
+                    <span v-if="info.daily_forecast[0].cond.code_d==101"><img src="./img/weather/101.png"></span>
+                    <span v-if="info.daily_forecast[0].cond.code_d==104"><img src="./img/weather/104.png"></span>
+                    <span v-if="info.daily_forecast[0].cond.code_d==305"><img src="./img/weather/305.png"></span>
+                </p>
             </div>
             <div class="right">
                 <p>{{ info.daily_forecast[0].cond.txt_d }}</p>
@@ -54,7 +59,7 @@
 </body>
 <script src="./js/vue.min.js"></script>
 <script>
-    console.log(weatherData)
+    
     new Vue({
         el: '#container',
         data: {
@@ -63,26 +68,30 @@
         },
         mounted: function () {
             console.log(this.info)
-            console.log(this.info.aqi)
         },
         methods: {
             weekday: function (d) {
                 var n = d.slice(5)
                 var formatdate = n.replace("-", "/")
-                console.log(formatdate)
+          
                 var date = d.replace(/-/g, ",")
-                console.log(date)
+               
                 var da = new Date(date);
                 // da.setFullYear(date);
-                console.log(da)
+               
                 var weekday = new Array(7);
                 weekday = ["周日", "周一", "周二", "周三",
                     "周四", "周五", "周六"]
-                console.log(weekday[da.getDay()])
+               
                 return {
                     weekd: weekday[da.getDay()],
                     da: formatdate
                 }
+            },
+            change: function () {
+                var _this=this;
+                _this.$set(this,'info',weatherData.HeWeather[1])
+                console.log(this.info)
             }
         }
 
