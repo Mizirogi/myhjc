@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather</title>
+    <script src="./js/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="./js/bootstrap.js"></script>
+
+    <script src="./js/weather-data.js"></script>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="headr">
+            <div class="left">
+                <p class="city"> <span class="name">{{info.basic.city}}天气</span> <a href="">[切换]</a> </p>
+                <img src="./img/weather/100.png" alt="">
+            </div>
+            <div class="right">
+                <p>{{ info.daily_forecast[0].cond.txt_d }}</p>
+                <p class="tmp">{{info.daily_forecast[0].tmp.min}}~{{info.daily_forecast[0].tmp.max}}℃</p>
+                <p>当前气温：{{ info.now.tmp }}</p>
+                <p>{{ info.now.wind.dir }}{{ info.now.wind.sc }}级</p>
+                <p class="aqi">空气质量指数：{{ info.aqi.city.aqi }}{{ info.aqi.city.qlty }}</p>
+            </div>
+        </div>
+        <div class="listtitle"> 七日天气预报</div>
+        <div class="lists">
+            <div v-for="(item,idx) in info.daily_forecast" class="daily">
+                <p :class="{'weekend':weekday(item.date).weekd=='周六'||weekday(item.date).weekd=='周日'}"> 
+                    {{weekday(item.date).da}}
+                    <span v-if="idx==0">今日</span>
+                    <span v-else-if="idx==1">明日</span>
+                    <span v-else>{{weekday(item.date).weekd}}</span>
+
+                </p>
+                <p class="detail"> <span v-if="item.cond.code_d==100"><img src="./img/weather/100.png"></span>
+                    <span v-if="item.cond.code_d==101"><img src="./img/weather/101.png"></span>
+                    <span v-if="item.cond.code_d==104"><img src="./img/weather/104.png"></span>
+                    <span v-if="item.cond.code_d==305"><img src="./img/weather/305.png"></span>
+                    {{item.cond.txt_d}}
+                    <span v-if="item.cond.code_d!=item.cond.code_n">转 {{item.cond.txt_n}}</span>
+                </p>
+                <P> <span style="color: #4ABD72">{{item.tmp.min}}</span>~<span
+                        style="color: #FD9764">{{item.tmp.max}}℃</span></P>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="./js/vue.min.js"></script>
+<script>
+
+    new Vue({
+        el: '#container',
+        data: {
+            info: weatherData.HeWeather[0],
+            img: ".png",
+        },
+        mounted: function () {
+            console.log(this.info)
+            console.log(this.info.aqi)
+        },
+        methods: {
+            weekday: function (d) {
+                var n = d.slice(5)
+                var formatdate = n.replace("-", "/")
+                console.log(formatdate)
+                var date = d.replace(/-/g, ",")
+                console.log(date)
+                var da = new Date(date);
+                // da.setFullYear(date);
+                console.log(da)
+                var weekday = new Array(7);
+                weekday = ["周日", "周一", "周二", "周三",
+                    "周四", "周五", "周六"]
+                console.log(weekday[da.getDay()])
+                return {
+                    weekd: weekday[da.getDay()],
+                    da: formatdate
+                }
+            }
+        }
+
+    })
+
+</script>
+<style>
+    .headr {
+        display: flex;
+        flex-direction: row;
+        background-color: #0F9BEC;
+        height: 240px;
+        width: 100%;
+    }
+
+    .headr .left {
+        width: 50%;
+        color: white
+    }
+    .headr .left .city {
+       margin: 3% 0 3% 0;
+       padding: 0 0 0 6%;
+    }
+    .headr .left .city .name {
+       font-size: 25px;
+    }
+    .headr .left .city a{
+       color: #fff;
+    }
+
+    .headr .right {
+        display: flex;
+        width: 50%;
+        color: white;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-around;
+        text-align: right;
+        padding-right: 3%
+    }
+    .headr .right :first-child {
+        font-size: 25px;
+        padding-top: 3%;
+        height: 30px;  
+        
+    }
+    .headr .right p {
+        text-align: right;
+    }
+
+
+    .headr .tmp {
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .headr .aqi {
+        background-color: #45AEF0;
+        border: 1px solid #45AEF0;
+        border-radius: 3px;
+        padding: 0 8px 0 8px;
+    }
+
+    .listtitle {
+        line-height: 60px;
+        height: 60px;
+        font-size: 24px;
+        padding: 0 0 0 3%
+    }
+
+    .daily {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 40px;
+        padding: 0 0 0 3%;
+        margin: 5px 2% 5px 0;
+    }
+    .daily .weekend{
+color:red;
+    }
+    .daily .detail{
+        width: 200px;
+    }
+
+    .daily img {
+        width: 40px;
+        height: 40px;
+    }
+    
+</style>
+
+</html>

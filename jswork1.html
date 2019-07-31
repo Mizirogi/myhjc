@@ -8,7 +8,12 @@
     <title>Document</title>
     <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
     <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
-    <script language="javascript" type="text/javascript" src="https://cdn.staticfile.org/jquery/1.7.2/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript"
+        src="https://cdn.staticfile.org/jquery/1.7.2/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
 </head>
 
 <body>
@@ -41,10 +46,33 @@
         <p id="shop"></p>
     </div>
     <div id="vcomments"></div>
+
+    <!-- <div id="aplayer"></div> -->
+
+    <!-- <div class="aplayer" data-id="60198" data-server="netease" data-type="playlist" data-fixed="true"></div> -->
+    <meting-js
+	server="netease"
+	type="playlist"
+    id="60198"
+    fixed="true"
+    >
+</meting-js>
 </body>
 
 
 <script>
+    // const ap = new APlayer({
+    //     container: document.getElementById('aplayer'),
+    //     fixed: true,
+    //     audio: [{
+    //         name: 'name',
+    //         artist: 'artist',
+    //         url: 'url.mp3',
+    //         cover: 'cover.jpg',
+    //     }]
+    // });
+
+
     new Valine({
         el: '#vcomments',
         app_id: 'gEkw1BH5bgc0kh46jbqv5xnu-gzGzoHsz',
@@ -185,6 +213,8 @@
     }
 
     function autoshop() {
+
+        
         let money = document.getElementById("usermoney").value;
         let n20 = Math.floor(money / 20);
         let idx = money % 20;
@@ -200,13 +230,9 @@
 
     }
 
-    var authorName = "芝麻开花";
-    function doSomething() {
-        var bookName = "javascript";
-    }
-    doSomething();
-    console.log(authorName);
-    console.log(bookName);
+
+
+
 
 </script>
 
