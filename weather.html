@@ -17,9 +17,10 @@
     <div class="container" id="container">
         <div class="headr">
             <div class="left">
-                <p class="city"> <span class="name">{{info.basic.city}}天气</span> <span @click="change()"> [切换]</span>  </p>
+                <p class="city"> <span class="name">{{info.basic.city}}天气</span> <span @click="change()"> [切换]</span>
+                </p>
                 <!-- <img src="./img/weather/100.png" alt=""> -->
-                <p > <span v-if="info.daily_forecast[0].cond.code_d==100"><img src="./img/weather/100.png"></span>
+                <p> <span v-if="info.daily_forecast[0].cond.code_d==100"><img src="./img/weather/100.png"></span>
                     <span v-if="info.daily_forecast[0].cond.code_d==101"><img src="./img/weather/101.png"></span>
                     <span v-if="info.daily_forecast[0].cond.code_d==104"><img src="./img/weather/104.png"></span>
                     <span v-if="info.daily_forecast[0].cond.code_d==305"><img src="./img/weather/305.png"></span>
@@ -59,12 +60,12 @@
 </body>
 <script src="./js/vue.min.js"></script>
 <script>
-    
+
     new Vue({
         el: '#container',
         data: {
+            idx: 0,
             info: weatherData.HeWeather[0],
-            img: ".png",
         },
         mounted: function () {
             console.log(this.info)
@@ -73,25 +74,31 @@
             weekday: function (d) {
                 var n = d.slice(5)
                 var formatdate = n.replace("-", "/")
-          
+
                 var date = d.replace(/-/g, ",")
-               
+
                 var da = new Date(date);
                 // da.setFullYear(date);
-               
+
                 var weekday = new Array(7);
                 weekday = ["周日", "周一", "周二", "周三",
                     "周四", "周五", "周六"]
-               
+
                 return {
                     weekd: weekday[da.getDay()],
                     da: formatdate
                 }
             },
             change: function () {
-                var _this=this;
-                _this.$set(this,'info',weatherData.HeWeather[1])
-                console.log(this.info)
+                var _this = this;
+                if (this.idx) {
+                    _this.$set(this, 'idx', 0)
+                    _this.$set(this, 'info', weatherData.HeWeather[this.idx])
+                } else {
+                    _this.$set(this, 'idx', 1)
+                    _this.$set(this, 'info', weatherData.HeWeather[this.idx])
+                }
+                // _this.$set(this,'info',weatherData.HeWeather[1])
             }
         }
 

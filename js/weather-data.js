@@ -383,8 +383,8 @@ var weatherData = {
           "pop": "0",
           "pres": "1005",
           "tmp": {
-            "max": "35",
-            "min": "23"
+            "max": "25",
+            "min": "13"
           },
           "vis": "10",
           "wind": {
@@ -411,8 +411,8 @@ var weatherData = {
           "pop": "0",
           "pres": "1008",
           "tmp": {
-            "max": "32",
-            "min": "25"
+            "max": "12",
+            "min": "5"
           },
           "vis": "10",
           "wind": {
@@ -439,8 +439,8 @@ var weatherData = {
           "pop": "72",
           "pres": "1007",
           "tmp": {
-            "max": "28",
-            "min": "22"
+            "max": "38",
+            "min": "12"
           },
           "vis": "9",
           "wind": {
@@ -467,8 +467,8 @@ var weatherData = {
           "pop": "61",
           "pres": "1005",
           "tmp": {
-            "max": "27",
-            "min": "22"
+            "max": "17",
+            "min": "11"
           },
           "vis": "10",
           "wind": {
@@ -495,8 +495,8 @@ var weatherData = {
           "pop": "35",
           "pres": "1002",
           "tmp": {
-            "max": "30",
-            "min": "20"
+            "max": "20",
+            "min": "10"
           },
           "vis": "10",
           "wind": {
@@ -523,8 +523,8 @@ var weatherData = {
           "pop": "0",
           "pres": "1001",
           "tmp": {
-            "max": "29",
-            "min": "22"
+            "max": "19",
+            "min": "16"
           },
           "vis": "10",
           "wind": {
