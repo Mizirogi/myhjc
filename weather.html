@@ -9,7 +9,6 @@
     <script src="./js/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <script src="./js/bootstrap.js"></script>
-
     <script src="./js/weather-data.js"></script>
 </head>
 
@@ -19,12 +18,7 @@
             <div class="left">
                 <p class="city"> <span class="name">{{info.basic.city}}天气</span> <span @click="change()"> [切换]</span>
                 </p>
-                <!-- <img src="./img/weather/100.png" alt=""> -->
-                <p> <span v-if="info.daily_forecast[0].cond.code_d==100"><img src="./img/weather/100.png"></span>
-                    <span v-if="info.daily_forecast[0].cond.code_d==101"><img src="./img/weather/101.png"></span>
-                    <span v-if="info.daily_forecast[0].cond.code_d==104"><img src="./img/weather/104.png"></span>
-                    <span v-if="info.daily_forecast[0].cond.code_d==305"><img src="./img/weather/305.png"></span>
-                </p>
+                <img :src="imgurl(info.daily_forecast[0].cond.code_d)">
             </div>
             <div class="right">
                 <p>{{ info.daily_forecast[0].cond.txt_d }}</p>
@@ -42,12 +36,9 @@
                     <span v-if="idx==0">今日</span>
                     <span v-else-if="idx==1">明日</span>
                     <span v-else>{{weekday(item.date).weekd}}</span>
-
                 </p>
-                <p class="detail"> <span v-if="item.cond.code_d==100"><img src="./img/weather/100.png"></span>
-                    <span v-if="item.cond.code_d==101"><img src="./img/weather/101.png"></span>
-                    <span v-if="item.cond.code_d==104"><img src="./img/weather/104.png"></span>
-                    <span v-if="item.cond.code_d==305"><img src="./img/weather/305.png"></span>
+                <p class="detail">
+                    <img :src="imgurl(item.cond.code_d)">
                     {{item.cond.txt_d}}
                     <span v-if="item.cond.code_d!=item.cond.code_n">转 {{item.cond.txt_n}}</span>
                 </p>
@@ -56,11 +47,10 @@
             </div>
         </div>
     </div>
-
 </body>
+
 <script src="./js/vue.min.js"></script>
 <script>
-
     new Vue({
         el: '#container',
         data: {
@@ -71,19 +61,19 @@
             console.log(this.info)
         },
         methods: {
+            imgurl: function (url) {
+                var imgurl = "./img/weather/" + url + ".png"
+                console.log(imgurl)
+                return imgurl
+            },
             weekday: function (d) {
                 var n = d.slice(5)
                 var formatdate = n.replace("-", "/")
-
                 var date = d.replace(/-/g, ",")
-
                 var da = new Date(date);
-                // da.setFullYear(date);
-
                 var weekday = new Array(7);
                 weekday = ["周日", "周一", "周二", "周三",
                     "周四", "周五", "周六"]
-
                 return {
                     weekd: weekday[da.getDay()],
                     da: formatdate
@@ -98,7 +88,6 @@
                     _this.$set(this, 'idx', 1)
                     _this.$set(this, 'info', weatherData.HeWeather[this.idx])
                 }
-                // _this.$set(this,'info',weatherData.HeWeather[1])
             }
         }
 
